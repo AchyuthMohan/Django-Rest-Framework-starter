@@ -7,7 +7,17 @@ from turtle import title
 from urllib import request
 from rest_framework import serializers
 from api_basic.models import Snippet,LANGUAGE_CHOICES,STYLE_CHOICES
+from django.contrib.auth.models import User
+
 class SnippetSerializer(serializers.ModelSerializer):
+    owner=serializers.ReadOnlyField(source='owner.username')
     class Meta:
         model=Snippet
-        fields=['id','title','code','linenos','language']
+        fields=['id','title','code','linenos','language','owner']
+
+class UserSerializer(serializers.ModelSerializer):
+    snippets=serializers.PrimaryKeyRelatedField(many=True,queryset=Snippet.objects.all())
+
+    class Meta:
+        model=User
+        fields=['id','username','snippets']
