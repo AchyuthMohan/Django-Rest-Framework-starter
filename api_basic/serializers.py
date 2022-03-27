@@ -6,7 +6,7 @@ from turtle import title
 # from typing_extensions import Required
 from urllib import request
 from rest_framework import serializers
-from api_basic.models import Snippet,LANGUAGE_CHOICES,STYLE_CHOICES
+from api_basic.models import Snippet
 from django.contrib.auth.models import User
 
 class SnippetSerializer(serializers.ModelSerializer):
